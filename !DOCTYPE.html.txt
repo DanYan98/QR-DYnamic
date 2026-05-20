@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+  <style>
+    body {
+      background-color: lightblue;
+      text-align: center;
+    }
+
+    .lds-ring {
+      display: inline-block;
+      position: relative;
+      width: 80px;
+      height: 80px;
+      margin-top: 100px;
+    }
+
+    .lds-ring div {
+      box-sizing: border-box;
+      display: block;
+      position: absolute;
+      width: 64px;
+      height: 64px;
+      margin: 8px;
+      border: 8px solid #fff;
+      border-radius: 50%;
+      animation: lds-ring 1.2s linear infinite;
+      border-color: #fff transparent transparent transparent;
+    }
+
+    @keyframes lds-ring {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    const AS_URL_BASE = "PEGA_AQUI_TU_URL_DE_APPS_SCRIPT";
+
+    var url = document.location.href;
+    var k = url.substr(url.lastIndexOf("k=") + 2);
+
+    if (k) {
+      fetch(AS_URL_BASE + "?k=" + k)
+        .then(r => r.text())
+        .then(r => {
+          console.log(r);
+
+          if (r) {
+            document.location.replace(r);
+          }
+        })
+        .catch(err => console.log(err));
+    }
+  </script>
+
+  <div class="lds-ring">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</body>
+</html>
